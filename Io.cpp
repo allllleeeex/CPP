@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream> 
 
+
 int main() {
 int x;
 std::ifstream num_file;
