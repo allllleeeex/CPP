@@ -25,7 +25,7 @@ int find_lowest(const std::vector<int>& nums) {
             smallest = i;
         }
     }
-    return smallest;
+    return nums[smallest];  // Return the smallest number, not the index
 }
 
 std::vector<int> sort(std::vector<int> num_list) {
@@ -33,8 +33,13 @@ std::vector<int> sort(std::vector<int> num_list) {
 
     while (!num_list.empty()) {
         int smallest = find_lowest(num_list);
-        sorted_list.push_back(num_list[smallest]);
-        num_list.erase(num_list.begin() + smallest);
+        sorted_list.push_back(smallest);
+        
+        // Remove the smallest number from the original list
+        auto it = std::find(num_list.begin(), num_list.end(), smallest);
+        if (it != num_list.end()) {
+            num_list.erase(it);
+        }
     }
 
     return sorted_list;
@@ -48,20 +53,23 @@ int main() {
 
     std::vector<int> num_list = read_numbers(inputFile);
     std::vector<int> sorted_list = sort(num_list);
+    int smallest = find_lowest(num_list);  // Use num_list here instead of inputFile
 
     std::cout << "Here are the ordered numbers from " << inputFile << ": \n";
     for (int num : sorted_list) {
         std::cout << num << " ";
     }
 
+    std::cout << "\nThe smallest number is " << smallest << ".\n";
+
     std::cout << "\nWhat file would you like to move the sorted values to?: ";
     std::cin >> outputFile;
 
-    std::ofstream newFile(outputFile);
+    std::ofstream newFile(outputFile);  // Open the output file
     for (int num : sorted_list) {
-        newFile << num << "\n";
+        newFile << num << "\n";  // Write sorted numbers to the output file
     }
 
-    newFile.close();
+    newFile.close();  // Close the output file
     return 0;
 }
