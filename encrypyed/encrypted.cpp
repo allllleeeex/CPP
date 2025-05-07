@@ -1,17 +1,18 @@
 #include <iostream>
 #include <fstream> 
-
+#include <string>
 int getShiftKey(ifstream& file) {
     int shift;
     file >> shift;
     return shift;
+}
 
 void DecryptedMessage(ifstream file, shift) {
-        string message;
-        (char x: file) {
-            char = char + shift
-        }
+    char ch;
+    while (file.get(ch)) {
+        cout << (char)(ch - shift);
     }
+}
 
 
 }
@@ -25,4 +26,3 @@ int main() {
     return 0;
 }
 
-return 1;
